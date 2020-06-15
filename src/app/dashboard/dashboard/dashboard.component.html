@@ -1,0 +1,87 @@
+<div id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <app-sidebar style="z-index: 5000;"></app-sidebar>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content" class="content">
+
+        <!-- Topbar -->
+        <app-navbar></app-navbar>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <div class="head-action row mb-5">
+            <div class="col-2">
+              <h4 class="">Quản lý thành viên</h4>
+            </div>
+            <div class="col-4">
+              <!-- Search user -->
+              <div class="input-group md-form form-sm form-2 pl-0 ">
+                <input class="form-control my-0 py-1 red-border" type="text" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                  <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey"
+                      aria-hidden="true"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <!-- add new user button -->
+              <div class="d-flex justify-content-end align-items-center ">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#user-form">Thêm mới
+                  user</button>
+                <!-- Add new user form -->
+
+              </div>
+            </div>
+          </div>
+          <router-outlet></router-outlet>
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <app-footer></app-footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Đăng xuất</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Chọn "Đăng xuất" bên dưới nếu bạn muốn kết thúc phiên hiện tại của mình.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Quay lại</button>
+          <a class="btn btn-primary" href="login.html">Đăng xuất</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
