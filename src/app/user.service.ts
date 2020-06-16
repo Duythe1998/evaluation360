@@ -1,7 +1,8 @@
+import { User } from './users/users-list/users-list.component';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { User } from './users-list/users-list.component';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,9 +18,9 @@ export class UserService {
     return this.http.delete(this._baseURL + `users/${id}`);
   }
   addUser(user: User) {
-    return this.http.post(this._baseURL + `users`,user);
+    return this.http.post(this._baseURL + `users`, user);
   }
-  updateUser(user: User,id: number) {
-    return this.http.put(this._baseURL+ `user/${id}`,user)
+  updateUser(user: User, id: number) {
+    return this.http.put(this._baseURL + `user/${id}`, user)
   }
 }

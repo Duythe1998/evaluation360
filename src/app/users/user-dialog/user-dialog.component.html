@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>Thêm mới user</h2>
+<hr>
+<mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="form" class="form">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Họ và tên" formControlName="name" [(ngModel)]="user.user_name">
+        </mat-form-field>
+        <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)">
+            <div *ngIf="form.controls['name'].errors?.required">
+                <span style="color: red;">Tên không được để trống</span>
+            </div>
+        </div>
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Email" formControlName="email" [(ngModel)]="user.email">
+        </mat-form-field>
+        <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+            <div *ngIf="form.controls['email'].errors?.required">
+                <span style="color: red;">Email không được để trống</span>
+            </div>
+        </div>
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Mật khẩu" formControlName="password" [(ngModel)]="user.user_password">
+        </mat-form-field>
+        <div
+            *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)">
+            <div *ngIf="form.controls['password'].errors?.required">
+                <span style="color: red;">Mật khẩu không được để trống</span>
+            </div>
+        </div>
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Địa chỉ" formControlName="address" [(ngModel)]="user.address">
+        </mat-form-field>
+        <div
+            *ngIf="form.controls['address'].invalid && (form.controls['address'].dirty || form.controls['address'].touched)">
+            <div *ngIf="form.controls['address'].errors?.required">
+                <span style="color: red;">Địa chỉ không được để trống</span>
+            </div>
+        </div>
+        <mat-form-field class="full-width">
+            <mat-label>Ngày sinh</mat-label>
+            <input matInput type="date" name="" id="" formControlName="birth" [(ngModel)]="user.birth">
+          </mat-form-field>
+            
+        
+        <div *ngIf="form.controls['birth'].invalid && (form.controls['birth'].dirty || form.controls['birth'].touched)">
+            <div *ngIf="form.controls['birth'].errors?.required">
+                <span style="color: red;">Ngày sinh không được để trống</span>
+            </div>
+        </div>
+        <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Số điện thoại" formControlName="phone" [(ngModel)]="user.phone">
+        </mat-form-field>
+        <div *ngIf="form.controls['phone'].invalid && (form.controls['phone'].dirty || form.controls['phone'].touched)">
+            <div *ngIf="form.controls['password'].errors?.required">
+                <span style="color: red;">Số điện thoại không được để trống</span>
+            </div>
+        </div>
+        <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Avatar" formControlName="avatar" [(ngModel)]="user.avatar">
+        </mat-form-field>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close>Quay lại</button>
+            <button mat-button (click)="save()" [disabled]="!form.valid">Lưu</button>
+        </mat-dialog-actions>
+    </form>
+
+</mat-dialog-content>

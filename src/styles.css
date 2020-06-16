@@ -10969,7 +10969,7 @@
     border-bottom:thin solid rgba(209, 211, 226, 0.89);
   }
   .content{
-    padding-top:13rem;
+    padding-top: 6rem;
   }
   .wrap-sidebar{
     min-height: 100vh;
@@ -11004,3 +11004,6 @@
     text-overflow: ellipsis;
     max-width: 150px;
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
