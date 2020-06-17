@@ -4,7 +4,7 @@ import { UserService } from './../../user.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
-import * as moment from 'moment'
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-users-list',
@@ -12,11 +12,12 @@ import * as moment from 'moment'
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
+  searchText;
   user = {} as User;
   users: any;
   constructor(
     private userService: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -30,16 +31,20 @@ export class UsersListComponent implements OnInit {
     })
   }
   deleteUser(id) {
-    this.userService.deleteUser(id).subscribe((res) => {
-      if (res) {
-        this.getAllUsers()
-      }
-    })
+    if (confirm('Bạn có chắc chắn xóa')) {
+      this.userService.deleteUser(id).subscribe((res) => {
+        if (res) {
+          this.getAllUsers()
+        }
+      })
+    }
   }
-  viewUserDetail() {
+  viewUserDetail(user) {
     const dialogRef = this.dialog.open(UserDetailComponent, {
-      height: '350px',
-      width: '700px'
+      width: '700px',
+      data: {
+        user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: user.birth, avatar: user.avatar, user_password: user.user_password,
+      }
     })
 
   }
@@ -52,7 +57,7 @@ export class UsersListComponent implements OnInit {
 
     });
     dialogRef.afterClosed().subscribe((res) => {
-      if(res != undefined){
+      if (res) {
         this.userService.addUser(res).subscribe((res) => {
           console.log(res)
           if (res) {
@@ -61,11 +66,34 @@ export class UsersListComponent implements OnInit {
           }
         })
       }
-      
     })
 
   }
-  
+  updateUser(user) {
+    console.log(user)
+    let obj = {
+      user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), avatar: user.avatar, user_password: user.user_password,
+    }
+    console.log(obj)
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      width: '500px',
+      data: obj 
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      console.log(res);
+      if (res) {
+        this.userService.updateUser(res, user.id).subscribe((res) => {
+          console.log(res)
+          if (res) {
+            alert('Sửa user thành công');
+            this.getAllUsers();
+          }
+        })
+      }
+
+    })
+  }
+ 
 }
 export interface User {
   id: number;

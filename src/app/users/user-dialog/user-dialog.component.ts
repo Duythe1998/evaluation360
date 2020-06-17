@@ -19,13 +19,16 @@ export class UserDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data)
+
     this.initForm();
     this.user = this.data;
+    console.log(this.data);
+    console.log(this.user);
+
   }
   initForm() {
     this.form = this.fb.group({
-      name: ['', [Validators.required]],
+      name: [ '', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       address: ['', [Validators.required]],
@@ -34,8 +37,8 @@ export class UserDialogComponent implements OnInit {
       avatar: [''],
     })
   }
+
   save() {
     this.dialogRef.close(this.user);
-
   }
 }
