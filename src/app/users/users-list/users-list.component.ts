@@ -46,7 +46,6 @@ export class UsersListComponent implements OnInit {
         user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: user.birth, avatar: user.avatar, user_password: user.user_password,
       }
     })
-
   }
   addNewUser() {
     const dialogRef = this.dialog.open(UserDialogComponent, {

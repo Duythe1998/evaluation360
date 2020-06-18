@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./user-dialog.component.css']
 })
 export class UserDialogComponent implements OnInit {
-  phoneNumber = "^(\+\d{1,3}[- ]?)?\d{10}$";
+  title : any;
   user = {} as User
   form: FormGroup;
   constructor(
@@ -20,22 +20,18 @@ export class UserDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.initForm();
     this.user = this.data;
-    console.log(this.data);
-    console.log(this.user);
-
   }
   initForm() {
-    
+   
     this.form = this.fb.group({
-      name: [ '', [Validators.required]],
-      email: ['', [Validators.required , Validators.email]],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      birth: ['', [Validators.required ]],
-      phone: ['', [Validators.required , Validators.pattern( "(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})")]],
+      birth: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern("(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})")]],
       avatar: [''],
     })
   }
