@@ -1,3 +1,4 @@
+import { UsersModule } from './users/users.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
@@ -24,13 +25,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AppComponent,
-    UsersListComponent,
     DashboardComponent,
     SidebarComponent,
     NavbarComponent,
     FooterComponent,
-    UserDetailComponent,
-    UserDialogComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -45,7 +44,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
