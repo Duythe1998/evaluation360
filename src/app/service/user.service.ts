@@ -1,4 +1,4 @@
-import { User } from './users/users-list/users-list.component';
+import { User } from '../users/users-list/users-list.component';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';

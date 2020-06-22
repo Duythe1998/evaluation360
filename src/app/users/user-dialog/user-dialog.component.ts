@@ -22,6 +22,7 @@ export class UserDialogComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.user = this.data;
+    
   }
   initForm() {
    
@@ -32,8 +33,11 @@ export class UserDialogComponent implements OnInit {
       address: ['', [Validators.required]],
       birth: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern("(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})")]],
-      avatar: [''],
+      team: ['', Validators.required],
+      course: ['', [Validators.required]],
+
     })
+    
   }
   get f() { return this.form.controls; }
   save() {

@@ -1,5 +1,5 @@
 import { UserDialogComponent } from './../user-dialog/user-dialog.component';
-import { UserService } from './../../user.service';
+import { UserService } from '../../service/user.service';
 
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,7 +14,7 @@ import * as moment from 'moment';
 export class UsersListComponent implements OnInit {
   searchText;
   user = {} as User;
-  users: any;
+  users = [];
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
@@ -27,7 +27,7 @@ export class UsersListComponent implements OnInit {
   getAllUsers() {
     this.userService.getAllUser().subscribe((res) => {
       console.log(res)
-      this.users = res[0];
+      this.users = res;
     })
   }
   deleteUser(id) {
@@ -43,7 +43,7 @@ export class UsersListComponent implements OnInit {
     const dialogRef = this.dialog.open(UserDetailComponent, {
       width: '700px',
       data: {
-        user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: user.birth, avatar: user.avatar, user_password: user.user_password,
+        user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: user.birth, user_password: user.user_password,
       }
     })
   }
@@ -51,7 +51,7 @@ export class UsersListComponent implements OnInit {
     const dialogRef = this.dialog.open(UserDialogComponent, {
       width: '500px',
       data: {
-        user_name: this.user.user_name, email: this.user.email, address: this.user.address, phone: this.user.phone, birth: this.user.birth, avatar: this.user.avatar, user_password: this.user.user_password,
+        user_name: this.user.user_name, email: this.user.email, address: this.user.address, phone: this.user.phone, birth: this.user.birth, user_password: this.user.user_password,
       }
 
     });
@@ -71,7 +71,7 @@ export class UsersListComponent implements OnInit {
   updateUser(user) {
     console.log(user)
     let obj = {
-      user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), avatar: user.avatar, user_password: user.user_password,
+      user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), user_password: user.user_password,
     }
     console.log(obj)
     const dialogRef = this.dialog.open(UserDialogComponent, {
@@ -101,6 +101,6 @@ export interface User {
   address: string;
   phone: string;
   birth: string;
-  avatar?: string;
+
   user_password: string;
 }

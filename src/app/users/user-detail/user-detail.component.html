@@ -1,17 +1,12 @@
 <h2 mat-dialog-title>Chi tiết user</h2>
 <hr>
 <mat-dialog-content class="mat-typography">
-  <div class="user-detail text-center">
-    <div class="card" >
-      <img class="card-img-top" src="{{user.avatar}}" alt="Card image ">
-      <div class="card-body">
-        <h3 class="card-title text-uppercase">{{user.user_name}}</h3>
-        <p class="card-text">Fresher-Frond-end Double 2020</p>
-        <p>Email : {{user.email}}</p>
-        <p>Số điện thoại : {{user.phone}}</p>
-      </div>
-    </div>
-  </div>
+
+  <h3 class="card-title text-uppercase">{{user.user_name}}</h3>
+  <p class="card-text">Fresher-Frond-end Double 2020</p>
+  <p>Email : {{user.email}}</p>
+  <p>Số điện thoại : {{user.phone}}</p>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Quay lại</button>

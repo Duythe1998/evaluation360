@@ -1,52 +1,57 @@
-
 <div class="container-fluid">
-    <div class="row pb-3">
-        <div class="col-2">
-            <h3 class="">Quản lý thành viên</h3>
-          </div>
-          <div class="col-4">
-            <div class="input-group md-form form-sm form-2 pl-0 ">
-              <input class="form-control my-0 py-1 red-border" type="text" placeholder="Tìm kiếm thành viên" aria-label="Tìm kiếm thành viên" [(ngModel)]="searchText">
-              <div class="input-group-append">
-                
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="d-flex justify-content-end align-items-center ">
-              <button (click)="addNewUser()" type="button" class="btn btn-primary" >Thêm mới
-                user</button>
-            </div>
-          </div>
+  <div class="row pb-3">
+    <div class="col-2">
+      <h3 class="">Quản lý thành viên</h3>
     </div>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">STT</th>
-                <th scope="col">ID</th>
-                <th scope="col">Tên</th>
-                <th scope="col">Địa chỉ</th>
-                <th scope="col">Email</th>
-                <th scope="col">Số điện thoại</th>
-                <th scope="col">Ngày sinh</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users | filter:searchText ; let i = index">
-                <td scope="row">{{i}}</td>
-                <td>{{user.id}}</td>
-                <td>{{user.user_name}}</td>
-                <td>{{user.address}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.phone}}</td>
-                <td>{{user.birth | date: 'dd-MM-yyyy'}}</td>
-                <td >
-                    <button (click)="viewUserDetail(user)"  class="btn btn-primary btn-sm btn-action"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                    <button (click)="updateUser(user)"  class="btn btn-success btn-sm btn-action" ><i class="fa fa-wrench" aria-hidden="true"></i></button>
-                    <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm btn-action"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                  </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col-4">
+      <div class="input-group md-form form-sm form-2 pl-0 ">
+        <input class="form-control my-0 py-1 red-border" type="text" placeholder="Tìm kiếm thành viên"
+          aria-label="Tìm kiếm thành viên" [(ngModel)]="searchText">
+        <div class="input-group-append">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="d-flex justify-content-end align-items-center ">
+        <button (click)="addNewUser()" type="button" class="btn btn-primary">Thêm mới
+          user</button>
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">ID</th>
+        <th scope="col">Tên</th>
+        <th scope="col">Địa chỉ</th>
+        <th scope="col">Email</th>
+        <th scope="col">Số điện thoại</th>
+        <th scope="col">Ngày sinh</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+  
+      <tbody>
+          <tr *ngFor="let user of users | filter:searchText ; let i = index">
+            <td scope="row">{{i}}</td>
+            <td>{{user.id}}</td>
+            <td>{{user.user_name}}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.birth | date: 'dd-MM-yyyy'}}</td>
+            <td>
+              <button (click)="viewUserDetail(user)" class="btn btn-primary btn-sm btn-action"><i class="fa fa-eye"
+                  aria-hidden="true"></i></button>
+              <button (click)="updateUser(user)" class="btn btn-success btn-sm btn-action"><i class="fa fa-wrench"
+                  aria-hidden="true"></i></button>
+              <button (click)="deleteUser(user.id)" class="btn btn-danger btn-sm btn-action"><i class="fa fa-trash"
+                  aria-hidden="true"></i></button>
+            </td>
+          </tr>
+      </tbody>
+  </table>
+
 </div>
