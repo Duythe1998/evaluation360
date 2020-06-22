@@ -76,7 +76,7 @@ export class UsersListComponent implements OnInit {
     console.log(obj)
     const dialogRef = this.dialog.open(UserDialogComponent, {
       width: '500px',
-      data: obj 
+      data: obj
     });
     dialogRef.afterClosed().subscribe((res) => {
       console.log(res);
@@ -92,7 +92,7 @@ export class UsersListComponent implements OnInit {
 
     })
   }
- 
+
 }
 export interface User {
   id: number;

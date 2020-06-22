@@ -4,10 +4,11 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersRoutingModule } from './users/users-routing.module';
+import { TeamRoutingModule } from './team/team-routing.module';
 
 
 const routes: Routes = [
- 
+
   {
     path: 'dashboard' , component : DashboardComponent
   }
@@ -16,8 +17,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    UsersRoutingModule
-  
+    UsersRoutingModule,
+    TeamRoutingModule
   ],
   exports: [RouterModule]
 })
