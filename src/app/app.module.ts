@@ -19,6 +19,7 @@ import { MatInputModule ,  } from '@angular/material/input';
 import {MatDatepickerModule } from '@angular/material/datepicker' ;
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TeamModule } from './team/team.module';
+import {ProgramListComponent} from './program/program-list/program-list.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TeamModule } from './team/team.module';
     SidebarComponent,
     NavbarComponent,
     FooterComponent,
+    ProgramListComponent
   ],
   imports: [
     BrowserModule,

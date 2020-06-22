@@ -1,0 +1,160 @@
+<div class="container-fluid">
+  <!-- header -->
+  <div class="row pb-3 align-items-center">
+    <div class="col-2 d-flex align-items-center">
+        <h3 class="align-middle">Quản lý khóa học</h3>
+      </div>
+      <div class="col-4">
+        <div class="input-group md-form form-sm form-2 pl-0 ">
+
+          <input 
+            class="form-control my-0 py-1 red-border" 
+            type="text" 
+            placeholder="Tìm kiếm theo tên khóa học"
+            aria-label="Search"
+          >
+
+          <div class="input-group-append">
+            <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex justify-content-end align-items-center ">
+
+          <button 
+            class="btn btn-primary float-right" 
+            data-toggle="modal" 
+            data-target="#exampleModalCenter"
+            (click) = "conditionAdd()"
+          >
+            Thêm mới khóa học
+          </button>
+        </div>
+
+      </div>
+  </div>
+
+  <!-- table -->
+  <table class="table mt-4">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên Khóa học</th>
+            <th scope="col">Ngày bắt đầu </th>
+            <th scope="col">Ngày kết thúc</th>
+            <th class="text-center" scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let program of programs">
+        <td scope="row">{{program.id_course}}</td>
+        <td>{{program.name_course}}</td>
+        <td>{{program.date_start | date:"mediumDate"}}</td>
+        <td>{{program.date_end | date:"mediumDate"}}</td>
+        <td class="text-center" >
+            <button class="btn btn-primary btn-sm btn-action mr-2"><i class="fa fa-eye" aria-hidden="true"></i></button>
+            <button
+              (click) = "loadData(program.id);conditionEdit()"
+              class="btn btn-success btn-sm btn-action mr-2"
+              data-toggle="modal" 
+              data-target="#exampleModalCenter"  
+            >
+              <i class="fa fa-wrench" aria-hidden="true"></i>
+            </button>
+            <button 
+              (click)="onDeleteProgram(program.id)"
+              class="btn btn-danger btn-sm btn-action mr-2"
+            >
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- modal -->
+  <div 
+    class="modal fade bd-example-modal-lg show" 
+    id="exampleModalCenter" 
+    tabindex="-1" role="dialog" 
+    aria-labelledby="exampleModalCenterTitle" 
+    aria-modal="true"
+  >
+  
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+         
+          <h5 class="modal-title" >{{condition ? 'Thêm khóa học' : 'Sửa khóa học'}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group row">
+              <label for="nameCourse" class="col-sm-2 col-form-label">Tên khóa học</label>
+              <div class="col-sm-10">
+
+                <input
+                  [(ngModel)] = "program.programName"
+                  [ngModelOptions]="{standalone: true}"
+                  type="text" 
+                  class="form-control" 
+                  id="nameCourse" 
+                  value=""
+                >
+
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="startDate" class="col-sm-2 col-form-label">Ngày bắt đầu</label>
+              <div class="col-sm-10">
+                <input 
+                  [(ngModel)] = "program.enterDate"
+                  [ngModelOptions]="{standalone: true}"
+                  type="date" 
+                  class="form-control" 
+                  id="startDate" placeholder="Ngày bắt đầu">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="endDate" class="col-sm-2 col-form-label">Ngày kết thúc</label>
+              <div class="col-sm-10">
+                <input
+                  [(ngModel)] = "program.endDate"
+                  [ngModelOptions]="{standalone: true}"
+                  type="date" 
+                  class="form-control" 
+                  id="endDate" p
+                  laceholder="Ngày kết thúc">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Mô tả</label>
+              <div class="col-sm-10">
+                <textarea
+                  [(ngModel)] = "program.description"
+                  [ngModelOptions]="{standalone: true}"
+                  class="form-control" 
+                  id="exampleFormControlTextarea1" 
+                  rows="2"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+          <button 
+            (click)="onAddProgram()"
+            type="button" 
+            class="btn btn-primary"
+          >           
+            Lưu
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
