@@ -17,10 +17,10 @@ export class TeamService {
   getAllTeam(): Observable<Team[]> {
     return this.http.get<Team[]>(this._baseURL + `teams`);
   }
-  deleteTeam(id: number) {
-    return this.http.delete(this._baseURL + `team/${id}`);
+  deleteTeam(id_team: number) {
+    return this.http.delete(this._baseURL + `team/${id_team}`);
   }
-  addUser(user: Team) {
+  addTeam(user: Team) {
     return this.http.post(this._baseURL + `team`, user);
   }
   updateUser(user: Team, id: number) {
