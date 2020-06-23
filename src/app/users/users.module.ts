@@ -12,7 +12,7 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { UsersRoutingModule } from './users-routing.module';
 
 
@@ -35,6 +35,7 @@ import { UsersRoutingModule } from './users-routing.module';
     MatDatepickerModule,
     MatNativeDateModule,
     Ng2SearchPipeModule,
+    NgxMatSelectSearchModule
   ]
 })
 export class UsersModule { }

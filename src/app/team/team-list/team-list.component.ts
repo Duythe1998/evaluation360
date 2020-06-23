@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TeamService} from '../../service/team.service'
+import { TeamDialogComponent } from '../team-dialog/team-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -13,6 +15,7 @@ export class TeamListComponent implements OnInit {
   teams = [];
   constructor(
     private teamService: TeamService,
+    private dialog : MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +28,37 @@ export class TeamListComponent implements OnInit {
       this.teams = res;
       console.log(this.teams)
     })
+  }
+
+  deleteTeam(id){
+    if(confirm('Bạn có chắc muốn xóa không ? ')){
+      this.teamService.deleteTeam(id).subscribe((res) => {
+        if(res){
+          this.getAllTeam()
+        }
+      })
+    }
+  }
+  addNewTeam() {
+    const dialogRef = this.dialog.open(TeamDialogComponent, {
+      width: '500px',
+      data: {
+        name_team : this.team.name_team
+      }
+
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.teamService.addTeam(res).subscribe((res) => {
+          console.log(res)
+          if (res) {
+            alert('Them moi thanh cong');
+            this.getAllTeam();
+          }
+        })
+      }
+    })
+
   }
 
 }

@@ -14,7 +14,7 @@
     </div>
     <div class="col-6">
       <div class="d-flex justify-content-end align-items-center ">
-        <button  type="button" class="btn btn-primary">Thêm mới Team</button>
+        <button (click)="addNewTeam()"  type="button" class="btn btn-primary">Thêm mới Team</button>
       </div>
     </div>
   </div>
@@ -40,7 +40,10 @@
                   aria-hidden="true"></i></button>
               <button  class="btn btn-success btn-sm btn-action"><i class="fa fa-wrench"
                   aria-hidden="true"></i></button>
-              <button  class="btn btn-danger btn-sm btn-action"><i class="fa fa-trash"
+              <button
+                class="btn btn-danger btn-sm btn-action"
+                (click)="deleteTeam(team.id_team)"
+                ><i class="fa fa-trash"
                   aria-hidden="true"></i></button>
             </td>
           </tr>
