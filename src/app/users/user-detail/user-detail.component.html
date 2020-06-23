@@ -1,12 +1,64 @@
-<h2 mat-dialog-title>Chi tiết thông tin thành viên</h2>
+<h2 mat-dialog-title>Chi tiết thành viên</h2>
 <hr>
 <mat-dialog-content class="mat-typography">
-
-  <h3 class="card-title text-uppercase">{{user.user_name}}</h3>
-  <p class="card-text">Fresher-Frond-end Double 2020</p>
-  <p>Email : {{user.email}}</p>
-  <p>Số điện thoại : {{user.phone}}</p>
-
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                   <div class="row">
+        <div class="col-4">
+          <div class="card" style="width:80%">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTXT-MvunybNC8rfKP3k9axIiv4G8HRZIskEF5RZIRilJCvHnP-&usqp=CAU" class="card-img-top" alt="..." >
+            <div class="card-body text-center">
+              <h3 class="card-title text-center">{{user.user_name}}</h3>
+              <p class="card-text text-center">
+                <small class="text-muted">Fresher</small>
+                <small class="text-muted"> - </small>
+                <small class="text-muted">{{user.name_team}} </small>
+                <small class="text-muted"> - </small>
+                <small class="text-muted">{{user.name_course}} </small>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">Create Date</small>
+                <strong>11/05/2020</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="row">
+            <div class="col-12">
+              <div class="user-info">
+                <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <th scope="col">Họ và tên</th>
+                      <td>{{user.user_name}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="col">Ngày sinh</th>
+                      <td>{{user.birth}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="col">Số điện thoại</th>
+                      <td>{{user.phone}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="col">Địa chỉ</th>
+                      <td>{{user.address}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="col">Email</th>
+                      <td>{{user.email}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Quay lại</button>
