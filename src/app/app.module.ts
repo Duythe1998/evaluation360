@@ -21,6 +21,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TeamModule } from './team/team.module';
 import {ProgramListComponent} from './program/program-list/program-list.component'
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import {ProgramListComponent} from './program/program-list/program-list.componen
     MatNativeDateModule,
     Ng2SearchPipeModule,
     UsersModule,
-    TeamModule
+    TeamModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

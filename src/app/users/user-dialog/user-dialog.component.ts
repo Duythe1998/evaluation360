@@ -3,7 +3,7 @@ import { TeamService } from './../../service/team.service';
 import { User } from './../users-list/users-list.component';
 import { Component, OnInit, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-user-dialog',

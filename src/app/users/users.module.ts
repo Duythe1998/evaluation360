@@ -14,8 +14,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { UsersRoutingModule } from './users-routing.module';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { JwPaginationModule } from 'jw-angular-pagination';
 @NgModule({
   declarations: [
     UserDetailComponent,
@@ -27,6 +28,7 @@ import { UsersRoutingModule } from './users-routing.module';
     UsersRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -35,7 +37,16 @@ import { UsersRoutingModule } from './users-routing.module';
     MatDatepickerModule,
     MatNativeDateModule,
     Ng2SearchPipeModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    JwPaginationModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-top-right'
+    
+    })
+  ],
+  providers: [
+
   ]
 })
 export class UsersModule { }

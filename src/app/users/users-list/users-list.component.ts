@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users-list',
@@ -15,14 +16,20 @@ export class UsersListComponent implements OnInit {
   searchText;
   user = {} as User;
   users = [];
+  items = [];
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {
     this.getAllUsers();
     console.log(this.users);
+
+  }
+  showToaster() {
+    this.toastr.success("Hello, I'm the toastr message.")
   }
   getAllUsers() {
     this.userService.getAllUser().subscribe((res) => {
@@ -34,6 +41,7 @@ export class UsersListComponent implements OnInit {
     if (confirm('Bạn có chắc chắn xóa')) {
       this.userService.deleteUser(id).subscribe((res) => {
         if (res) {
+          this.toastr.success(res['message'])
           this.getAllUsers()
         }
       })
@@ -53,14 +61,15 @@ export class UsersListComponent implements OnInit {
         user_name: this.user.user_name, email: this.user.email, address: this.user.address, phone: this.user.phone, birth: this.user.birth, user_password: this.user.user_password, id_course: this.user.id_course, id_team: this.user.id_team
       }
     });
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res) {
-        this.userService.addUser(res).subscribe((res) => {
+    dialogRef.afterClosed().subscribe((user) => {
+      if (user) {
+        this.userService.addUser(user).subscribe((res) => {
           console.log(res)
           if (res) {
-            alert('Thêm mới thành công');
+            this.toastr.success(res['message']);
             this.getAllUsers();
           }
+
         })
       }
     })
@@ -82,7 +91,7 @@ export class UsersListComponent implements OnInit {
         this.userService.updateUser(res, user.id).subscribe((res) => {
           console.log(res)
           if (res) {
-            alert('Sửa user thành công');
+            this.toastr.success(res['message']);
             this.getAllUsers();
           }
         })
