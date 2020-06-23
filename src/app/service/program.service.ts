@@ -15,8 +15,8 @@ export class ProgramService {
   getAllProgram() : Observable<Program[]> {
     return this.http.get<Program[]>(this._url)
   }
-  getProgram(id:number) : Observable<Program[]> {
-    return this.http.get<Program[]>(this._url+'/'+id)
+  getProgram(id:number){
+    return this.http.get(this._url+'/'+id)
   }
   addProgram(program : Program) : Observable<Program[]> {
     return this.http.post<Program[]>(this._url,program)
@@ -24,7 +24,7 @@ export class ProgramService {
   deleteProgram(id : number) : Observable<Program[]> {
     return this.http.delete<Program[]>(this._url + '/' +id)
   }
-  updateProgram(program : Program) : Observable<Program[]> {
-    return this.http.put<Program[]>(`${this._url}/${program.id_course}`, program)
+  updateProgram(program : Program) {
+    return this.http.put(`${this._url}/${program.id_course}`, program)
   }
 }
