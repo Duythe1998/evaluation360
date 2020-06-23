@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { TeamRoutingModule } from './team-routing.module';
 import { TeamListComponent } from './team-list/team-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,11 +11,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { TeamDialogComponent } from './team-dialog/team-dialog.component';
+import {TeamDetailComponent} from './team-detail/team-detail.component';
 
 
 @NgModule({
   declarations: [
-    TeamListComponent
+    TeamListComponent,
+    TeamDialogComponent,
+    TeamDetailComponent
   ],
   imports: [
     CommonModule,

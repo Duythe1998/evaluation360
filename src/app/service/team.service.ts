@@ -21,9 +21,9 @@ export class TeamService {
     return this.http.delete(this._baseURL + `team/${id_team}`);
   }
   addTeam(user: Team) {
-    return this.http.post(this._baseURL + `team`, user);
+    return this.http.post(this._baseURL + `teams`, user);
   }
-  updateUser(user: Team, id: number) {
+  updateTeam(user: Team, id: number) {
     return this.http.put(this._baseURL + `team/${id}`, user)
   }
 }

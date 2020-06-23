@@ -5,7 +5,7 @@ import { Program } from 'src/app/models/program.model';
 import * as moment from 'moment'
 @Component({
   selector: 'app-program-list',
-  templateUrl: './program-list.component.html',
+  templateUrl:'./program-list.component.html',
   styleUrls: ['./program-list.component.css']
 })
 export class ProgramListComponent implements OnInit {
@@ -21,7 +21,7 @@ export class ProgramListComponent implements OnInit {
     this.program = new Program();
     this.getAllData();
 
-    //load data edit 
+    //load data edit
   }
   // get all data from Database
   getAllData() {
@@ -35,15 +35,15 @@ export class ProgramListComponent implements OnInit {
     this.subscription = this.programService.addProgram(this.program).subscribe(data => {
       this.getAllData() // render data after add new one
     })
-  } 
-  // delete data 
+  }
+  // delete data
   onDeleteProgram(id : number) {
     this.subscription = this.programService.deleteProgram(id).subscribe((data)=>{
       this.getAllData() // render data after add delete one
     })
   }
   // load data when click program
-  loadData(id : number) { 
+  loadData(id : number) {
     this.subscription = this.programService.getProgram(id).subscribe((data)=>{
      this.program = {
         name_course : data[0].name_course,
@@ -54,7 +54,7 @@ export class ProgramListComponent implements OnInit {
      console.log(`[program]`,this.program)
     })
   }
-  //update data 
+  //update data
   onUpdateProgram(program : Program) {
     this.subscription = this.programService.updateProgram(program).subscribe((data)=>{
       console.log(data)
