@@ -13,8 +13,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     UserDetailComponent,
@@ -34,6 +34,8 @@ import { UsersRoutingModule } from './users-routing.module';
     MatDatepickerModule,
     MatNativeDateModule,
     Ng2SearchPipeModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ]
 })
 export class UsersModule { }
