@@ -25,23 +25,19 @@
         <th scope="col">STT</th>
         <th scope="col">ID</th>
         <th scope="col">Tên</th>
-        <th scope="col">Địa chỉ</th>
-        <th scope="col">Email</th>
-        <th scope="col">Số điện thoại</th>
-        <th scope="col">Ngày sinh</th>
+        <th scope="col">Team</th>
+        <th scope="col">Khóa học</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
   
       <tbody>
           <tr *ngFor="let user of users | filter:searchText ; let i = index">
-            <td scope="row">{{i}}</td>
+            <td scope="row">{{i + 1}}</td>
             <td>{{user.id}}</td>
             <td>{{user.user_name}}</td>
-            <td>{{user.address}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.phone}}</td>
-            <td>{{user.birth | date: 'dd-MM-yyyy'}}</td>
+            <td>{{user.name_team}}</td>
+            <td>{{user.name_course}}</td>
             <td>
               <button (click)="viewUserDetail(user)" class="btn btn-primary btn-sm btn-action"><i class="fa fa-eye"
                   aria-hidden="true"></i></button>
