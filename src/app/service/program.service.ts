@@ -24,7 +24,7 @@ export class ProgramService {
   deleteProgram(id : number) : Observable<Program[]> {
     return this.http.delete<Program[]>(this._url + '/' +id)
   }
-  updateProgram(program : Program) : Observable<Program[]> {
-    return this.http.put<Program[]>(`${this._url}/${program.id_course}`, program)
+  updateProgram(program : Program) {
+    return this.http.put(`${this._url}/${program.id_course}`, program)
   }
 }

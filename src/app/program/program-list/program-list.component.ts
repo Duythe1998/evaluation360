@@ -57,6 +57,7 @@ export class ProgramListComponent implements OnInit {
   //update data 
   onUpdateProgram(program : Program) {
     this.subscription = this.programService.updateProgram(program).subscribe((data)=>{
+      console.log(data)
       this.getAllData() // render data after add delete one
     })
   }
@@ -72,9 +73,11 @@ export class ProgramListComponent implements OnInit {
   AddorUpdate(program) {
     if(this.condition) {
       this.onAddProgram()
+      console.log('add')
     }
     else{
       this.onUpdateProgram(program)
+      console.log('edit')
     }
   }
   ngOnDestroy(){
