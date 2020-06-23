@@ -1,5 +1,7 @@
+import { ProgramService } from './../../service/program.service';
+import { TeamService } from './../../service/team.service';
 import { User } from './../users-list/users-list.component';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -9,23 +11,41 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./user-dialog.component.css']
 })
 export class UserDialogComponent implements OnInit {
-  title : any;
+  title: any;
   user = {} as User
   form: FormGroup;
+  courses = [];
+  teams = [];
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<UserDialogComponent>,
+    private teamService: TeamService,
+    private programService: ProgramService,
     @Inject(MAT_DIALOG_DATA) public data: any
 
   ) { }
 
   ngOnInit(): void {
+   
     this.initForm();
     this.user = this.data;
-    
+    this.getAllCourses();
+    this.form.get('course').valueChanges.subscribe((course) => {
+      if (course) {
+        this.teamService.getAllTeam().subscribe((res) => {
+          if (res) {
+            this.teams = res.filter((t) => {
+              return t.id_course === course;
+            });
+            
+          }
+        })
+      }
+
+    })
+   
   }
   initForm() {
-   
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -37,7 +57,12 @@ export class UserDialogComponent implements OnInit {
       course: ['', [Validators.required]],
 
     })
-    
+
+  }
+  getAllCourses() {
+    this.programService.getAllProgram().subscribe((res) => {
+      this.courses = res;
+    })
   }
   get f() { return this.form.controls; }
   save() {

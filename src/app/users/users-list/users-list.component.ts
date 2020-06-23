@@ -43,24 +43,22 @@ export class UsersListComponent implements OnInit {
     const dialogRef = this.dialog.open(UserDetailComponent, {
       width: '700px',
       data: {
-        user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: user.birth, user_password: user.user_password,
+        user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: user.birth, user_password: user.user_password, id_course: this.user.id_course, id_team: this.user.id_team
       }
     })
   }
   addNewUser() {
     const dialogRef = this.dialog.open(UserDialogComponent, {
-      width: '500px',
       data: {
-        user_name: this.user.user_name, email: this.user.email, address: this.user.address, phone: this.user.phone, birth: this.user.birth, user_password: this.user.user_password,
+        user_name: this.user.user_name, email: this.user.email, address: this.user.address, phone: this.user.phone, birth: this.user.birth, user_password: this.user.user_password, id_course: this.user.id_course, id_team: this.user.id_team
       }
-
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.userService.addUser(res).subscribe((res) => {
           console.log(res)
           if (res) {
-            alert('Them moi thanh cong');
+            alert('Thêm mới thành công');
             this.getAllUsers();
           }
         })
@@ -71,7 +69,7 @@ export class UsersListComponent implements OnInit {
   updateUser(user) {
     console.log(user)
     let obj = {
-      user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), user_password: user.user_password,
+      user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), user_password: user.user_password, id_course: user.id_course, id_team: user.id_team
     }
     console.log(obj)
     const dialogRef = this.dialog.open(UserDialogComponent, {
@@ -101,6 +99,7 @@ export interface User {
   address: string;
   phone: string;
   birth: string;
-
   user_password: string;
+  id_team: number;
+  id_course: number;
 }
