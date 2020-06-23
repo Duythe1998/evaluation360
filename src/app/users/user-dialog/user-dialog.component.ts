@@ -26,7 +26,7 @@ export class UserDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-   
+
     this.initForm();
     this.user = this.data;
     this.getAllCourses();
@@ -37,13 +37,12 @@ export class UserDialogComponent implements OnInit {
             this.teams = res.filter((t) => {
               return t.id_course === course;
             });
-            
+
           }
         })
       }
-
     })
-   
+
   }
   initForm() {
     this.form = this.fb.group({

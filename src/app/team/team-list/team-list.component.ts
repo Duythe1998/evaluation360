@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TeamService} from '../../service/team.service'
 import { TeamDialogComponent } from '../team-dialog/team-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import { TeamDetailComponent } from '../team-detail/team-detail.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-team-list',
@@ -10,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./team-list.component.css']
 })
 export class TeamListComponent implements OnInit {
-
+  searchText;
   team = {} as Team;
   teams = [];
   constructor(
@@ -27,6 +28,17 @@ export class TeamListComponent implements OnInit {
     this.teamService.getAllTeam().subscribe((res) => {
       this.teams = res;
       console.log(this.teams)
+    })
+  }
+
+  viewTeamDetail(team){
+    const dialogRef = this.dialog.open(TeamDetailComponent,{
+      width: '700px',
+      data: {
+        name_team: team.name_team,
+        id_course : team.id_course,
+        id_team: team.id_team
+      }
     })
   }
 
@@ -59,6 +71,31 @@ export class TeamListComponent implements OnInit {
       }
     })
 
+  }
+
+  updateTeam(team){
+    console.log(team);
+    let obj = {
+      name_team: team.name_team,
+      id_course: team.id_course
+    }
+    console.log(obj)
+    const dialogRef = this.dialog.open(TeamDialogComponent, {
+      width: '500px',
+      data: obj
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      console.log(res);
+      if(res){
+        this.teamService.updateTeam(res,team.id_team).subscribe((res) => {
+          console.log(res);
+          if(res){
+            alert('Sửa thành công');
+            this.getAllTeam();
+          }
+        })
+      }
+    })
   }
 
 }

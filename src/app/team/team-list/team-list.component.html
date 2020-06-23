@@ -6,7 +6,7 @@
     <div class="col-4">
       <div class="input-group md-form form-sm form-2 pl-0 ">
         <input class="form-control my-0 py-1 red-border" type="text" placeholder="Tìm kiếm thành viên"
-          aria-label="Tìm kiếm thành viên">
+          aria-label="Tìm kiếm thành viên" [(ngModel)] = "searchText">
         <div class="input-group-append">
 
         </div>
@@ -22,7 +22,6 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">STT</th>
-        <th scope="col">ID</th>
         <th scope="col">Tên Khóa Học </th>
         <th scope="col">Tên Team</th>
         <th scope="col">Action</th>
@@ -30,15 +29,18 @@
     </thead>
 
       <tbody>
-          <tr *ngFor="let team of teams;let i = index">
+          <tr *ngFor="let team of teams | filter:searchText ;let i = index">
             <td scope="row">{{i +1}}</td>
-            <td>{{team.id_team}}</td>
             <td>{{team.name_course}}</td>
             <td>{{team.name_team}}</td>
             <td>
-              <button  class="btn btn-primary btn-sm btn-action"><i class="fa fa-eye"
+              <button
+              (click)="viewTeamDetail(team)"
+              class="btn btn-primary btn-sm btn-action"><i class="fa fa-eye"
                   aria-hidden="true"></i></button>
-              <button  class="btn btn-success btn-sm btn-action"><i class="fa fa-wrench"
+              <button
+                (click)="updateTeam(team)"
+              class="btn btn-success btn-sm btn-action"><i class="fa fa-wrench"
                   aria-hidden="true"></i></button>
               <button
                 class="btn btn-danger btn-sm btn-action"

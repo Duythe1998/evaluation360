@@ -1,1 +1,25 @@
-<p>team-dialog works!</p>
+<h2 mat-dialog-title> {{ team.name_team ? 'Sửa thông tin team' : 'Thêm mới thông tin team' }} </h2>
+<hr>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" class="form">
+      <mat-form-field class="full-width">
+          <input matInput placeholder="Tên team" formControlName="name" [(ngModel)]="team.name_team">
+          <mat-error *ngIf="form.get('name').hasError('required')">
+              Tên team không được để trống
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+          <mat-label>Khóa học</mat-label>
+          <mat-select formControlName="course" [(ngModel)]="team.id_course">
+              <mat-option *ngFor="let course of courses" [value]="course.id_course">
+                  {{course.name_course}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      <mat-dialog-actions align="end">
+          <button mat-button mat-dialog-close>Quay lại</button>
+          <button mat-button (click)="save()" [disabled]="!form.valid">Lưu</button>
+      </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
