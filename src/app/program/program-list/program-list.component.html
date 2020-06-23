@@ -55,7 +55,7 @@
         <td class="text-center" >
             <button class="btn btn-primary btn-sm btn-action mr-2"><i class="fa fa-eye" aria-hidden="true"></i></button>
             <button
-              (click) = "loadData(program.id);conditionEdit()"
+              (click) = "loadData(program.id_course);conditionEdit()"
               class="btn btn-success btn-sm btn-action mr-2"
               data-toggle="modal" 
               data-target="#exampleModalCenter"  
@@ -63,7 +63,7 @@
               <i class="fa fa-wrench" aria-hidden="true"></i>
             </button>
             <button 
-              (click)="onDeleteProgram(program.id)"
+              (click)="onDeleteProgram(program.id_course)"
               class="btn btn-danger btn-sm btn-action mr-2"
             >
               <i class="fa fa-trash" aria-hidden="true"></i>
@@ -98,21 +98,20 @@
               <div class="col-sm-10">
 
                 <input
-                  [(ngModel)] = "program.programName"
+                  [(ngModel)] = "program.name_course"
                   [ngModelOptions]="{standalone: true}"
                   type="text" 
                   class="form-control" 
                   id="nameCourse" 
                   value=""
                 >
-
               </div>
             </div>
             <div class="form-group row">
               <label for="startDate" class="col-sm-2 col-form-label">Ngày bắt đầu</label>
               <div class="col-sm-10">
                 <input 
-                  [(ngModel)] = "program.enterDate"
+                  [(ngModel)] = "program.date_start "
                   [ngModelOptions]="{standalone: true}"
                   type="date" 
                   class="form-control" 
@@ -123,7 +122,7 @@
               <label for="endDate" class="col-sm-2 col-form-label">Ngày kết thúc</label>
               <div class="col-sm-10">
                 <input
-                  [(ngModel)] = "program.endDate"
+                  [(ngModel)] = "program.date_end"
                   [ngModelOptions]="{standalone: true}"
                   type="date" 
                   class="form-control" 
@@ -147,10 +146,10 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
           <button 
-            (click)="onAddProgram()"
+            (click)="AddorUpdate(program)"
             type="button" 
             class="btn btn-primary"
-          >           
+          >     
             Lưu
           </button>
         </div>
