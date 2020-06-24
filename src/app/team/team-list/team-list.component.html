@@ -19,11 +19,11 @@
     </div>
   </div>
   <table class="table">
-    <thead class="thead-dark">
+    <thead>
       <tr>
         <th scope="col">STT</th>
-        <th scope="col">Tên Khóa Học </th>
         <th scope="col">Tên Team</th>
+        <th scope="col">Tên Khóa Học </th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -31,8 +31,8 @@
       <tbody>
           <tr *ngFor="let team of teams | filter:searchText ;let i = index">
             <td scope="row">{{i +1}}</td>
-            <td>{{team.name_course}}</td>
             <td>{{team.name_team}}</td>
+            <td>{{team.name_course}}</td>
             <td>
               <button
               (click)="viewTeamDetail(team)"

@@ -4,6 +4,8 @@ import { TeamDialogComponent } from '../team-dialog/team-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TeamDetailComponent } from '../team-detail/team-detail.component';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -17,7 +19,8 @@ export class TeamListComponent implements OnInit {
   teams = [];
   constructor(
     private teamService: TeamService,
-    private dialog : MatDialog
+    private dialog : MatDialog,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +41,8 @@ export class TeamListComponent implements OnInit {
       data: {
         name_team: team.name_team,
         id_course : team.id_course,
-        id_team: team.id_team
+        id_team: team.id_team,
+        name_course: team.name_course
       }
     })
   }
@@ -47,6 +51,7 @@ export class TeamListComponent implements OnInit {
     if(confirm('Bạn có chắc muốn xóa không ? ')){
       this.teamService.deleteTeam(id).subscribe((res) => {
         if(res){
+          this.toastr.success(res['message']);
           this.getAllTeam()
         }
       })
@@ -65,7 +70,7 @@ export class TeamListComponent implements OnInit {
         this.teamService.addTeam(res).subscribe((res) => {
           console.log(res)
           if (res) {
-            alert('Them moi thanh cong');
+            this.toastr.success(res['message']);
             this.getAllTeam();
           }
         })
@@ -91,7 +96,7 @@ export class TeamListComponent implements OnInit {
         this.teamService.updateTeam(res,team.id_team).subscribe((res) => {
           console.log(res);
           if(res){
-            alert('Sửa thành công');
+            this.toastr.success(res['message']);
             this.getAllTeam();
           }
         })
@@ -104,4 +109,5 @@ export interface Team {
   id_course: number;
   id_team: number;
   name_team: string;
+  name_course:string;
 }

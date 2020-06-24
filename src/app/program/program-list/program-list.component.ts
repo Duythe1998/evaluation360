@@ -29,7 +29,7 @@ export class ProgramListComponent implements OnInit {
       this.programs = data
     })
   }
-  
+
   // add new data to database
   onAddProgram() {
     this.subscription = this.programService.addProgram(this.program).subscribe(data => {
