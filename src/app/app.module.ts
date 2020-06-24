@@ -19,7 +19,12 @@ import { MatInputModule ,  } from '@angular/material/input';
 import {MatDatepickerModule } from '@angular/material/datepicker' ;
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TeamModule } from './team/team.module';
-import {ProgramListComponent} from './program/program-list/program-list.component'
+import {ProgramListComponent} from './program/program-list/program-list.component';
+import { ProgramItemComponent } from './program/program-item/program-item.component'
+
+import {ProgramService} from './service/program.service'
+import { from } from 'rxjs';
+import { ProgramDetailComponent } from './program/program-detail/program-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,9 @@ import {ProgramListComponent} from './program/program-list/program-list.componen
     SidebarComponent,
     NavbarComponent,
     FooterComponent,
-    ProgramListComponent
+    ProgramListComponent,
+    ProgramItemComponent,
+    ProgramDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,8 @@ import {ProgramListComponent} from './program/program-list/program-list.componen
     UsersModule,
     TeamModule
   ],
-  providers: [],
+  entryComponents:[ProgramItemComponent],
+  providers: [ProgramService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

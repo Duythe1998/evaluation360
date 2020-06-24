@@ -2,87 +2,111 @@ import { Component, OnInit,OnDestroy } from '@angular/core';
 import {ProgramService} from '../../service/program.service'
 import { Subscription} from 'rxjs'
 import { Program } from 'src/app/models/program.model';
+import {NgForm} from '@angular/forms'
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog'
 import * as moment from 'moment'
+import { ProgramItemComponent } from '../program-item/program-item.component';
+import { ToastrService } from 'ngx-toastr';
+import { ProgramDetailComponent } from '../program-detail/program-detail.component';
 @Component({
   selector: 'app-program-list',
   templateUrl:'./program-list.component.html',
   styleUrls: ['./program-list.component.css']
 })
 export class ProgramListComponent implements OnInit {
-  public subscription:Subscription
-  public programs
-  public program
-  public condition: boolean =true;
+  programs:Program[]
+  program: Program
+  conditionStatus:boolean = true
   constructor(
-    public programService : ProgramService
+    public programService : ProgramService,
+    private dialog:MatDialog,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.program = new Program();
-    this.getAllData();
-
-    //load data edit
+    this.getAllProgram()
   }
-  // get all data from Database
-  getAllData() {
-    this.subscription = this.programService.getAllProgram().subscribe(data => {
-      this.programs = data
+  // get program to reander 
+  getAllProgram() {
+    this.programService.getAllProgram().subscribe(res => {
+      this.programs = res;
+      console.log(this.programs)
     })
   }
 
-  // add new data to database
-  onAddProgram() {
-    this.subscription = this.programService.addProgram(this.program).subscribe(data => {
-      this.getAllData() // render data after add new one
+
+  // add or edit program item
+  addOrEditProgram() {
+    this.conditionStatus = true
+    const dialogConfig = this.dialog.open(ProgramItemComponent,{
+      autoFocus : true,
+      disableClose: true,
+      width:"40%",
+      data:{
+        
+      },
+    
+    });
+    dialogConfig.afterClosed().subscribe(res => {
+      if (res) {
+        this.programService.addProgram(res).subscribe((res) => {
+          console.log(res)
+          if (res) {
+            this.toastr.success(res['message']);
+            this.getAllProgram();
+          }
+        })
+      }
     })
   }
-  // delete data
-  onDeleteProgram(id : number) {
-    this.subscription = this.programService.deleteProgram(id).subscribe((data)=>{
-      this.getAllData() // render data after add delete one
-    })
-  }
-  // load data when click program
-  loadData(id : number) {
-    this.subscription = this.programService.getProgram(id).subscribe((data)=>{
-     this.program = {
-        name_course : data[0].name_course,
-        date_start:  moment(data[0].date_start).format('YYYY-MM-DD'),
-        date_end:  moment(data[0].end).format('YYYY-MM-DD'),
-        description:  data[0].description
-     };
-     console.log(`[program]`,this.program)
-    })
-  }
-  //update data
-  onUpdateProgram(program : Program) {
-    this.subscription = this.programService.updateProgram(program).subscribe((data)=>{
-      console.log(data)
-      this.getAllData() // render data after add delete one
-    })
-  }
-  //condition
-  conditionEdit() {
-    this.condition =false
-    console.log(this.condition)
-  }
-  conditionAdd() {
-    this.condition =true
-    this.program ={}
-  }
-  AddorUpdate(program) {
-    if(this.condition) {
-      this.onAddProgram()
-      console.log('add')
+
+  deleteProgram(id:number){
+    if(confirm('Bạn có chắc muốn xóa không ? ')){
+      this.programService.deleteProgram(id).subscribe(res => {
+        this.toastr.success(res['message']);
+        this.getAllProgram();
+        console.log(res)
+      })
     }
-    else{
-      this.onUpdateProgram(program)
-      console.log('edit')
-    }
+    
+  }
+
+  updateProgram(program:Program){
+    this.conditionStatus = false
+    const dialogConfig = this.dialog.open(ProgramItemComponent,{
+      autoFocus : true,
+      disableClose: true,
+      width:"40%",
+      data:{
+        id_course: program.id_course,
+        name_course: program.name_course,
+        date_start:program.date_start ,
+        date_end:program.date_end,
+        description:program.description
+      }
+    });
+    dialogConfig.afterClosed().subscribe(res => {
+      this.programService.updateProgram(res).subscribe(res =>{
+        this.toastr.success(res['message']);
+        this.getAllProgram();
+      })
+    })
+  }
+
+  viewProgramDetail(program){
+    const dialogConfig = this.dialog.open(ProgramDetailComponent,{
+      autoFocus : true,
+      disableClose: true,
+      width:"70%",
+      data:{
+        id_course: program.id_course,
+        name_course: program.name_course,
+        date_start: program.date_start ,
+        date_end:program.date_end,
+        description:program.description
+      }
+    })
   }
   ngOnDestroy(){
-    if ( this.subscription){
-      this.subscription.unsubscribe();
-    }
   }
 }
