@@ -1,7 +1,7 @@
 import { ProgramService } from './../../service/program.service';
 import { TeamService } from './../../service/team.service';
 import { User } from './../users-list/users-list.component';
-import { Component, OnInit, Inject, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -41,8 +41,8 @@ export class UserDialogComponent implements OnInit {
         })
       }
     })
-    this.form.get('team').valueChanges.subscribe((team) => {
-      console.log(team)
+    this.form.valueChanges.subscribe((aaa) => {
+      console.log(aaa)
     })
   }
   initForm() {

@@ -29,9 +29,7 @@ export class UsersListComponent implements OnInit {
   }
   getAllUsers() {
     this.userService.getAllUser().subscribe((res) => {
-      console.log(res)
       this.users = res;
-      
     })
   }
   deleteUser(id) {
@@ -64,7 +62,6 @@ export class UsersListComponent implements OnInit {
     dialogRef.afterClosed().subscribe((user) => {
       if (user) {
         this.userService.addUser(user).subscribe((res) => {
-          console.log(res)
           if (res) {
            this.toastr.success(res['message']);
             this.getAllUsers();

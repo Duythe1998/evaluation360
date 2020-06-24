@@ -1,4 +1,4 @@
-<h2 mat-dialog-title> {{user.id ? 'Sửa thông tin thành viên' : 'Thêm mới thành viên'}}</h2>
+<h2 mat-dialog-title> {{user.user_name ? 'Sửa thông tin thành viên' : 'Thêm mới thành viên'}}</h2>
 <hr>
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="form" class="form">
@@ -67,7 +67,7 @@
         <mat-form-field class="full-width">
             <mat-label>Team</mat-label>
             <mat-select formControlName="team" [(ngModel)]="user.id_team">
-                <mat-option *ngFor="let team of teams" [value]="team.id_team">
+                <mat-option *ngFor="let team of teams" [value]="team.id_team" >
                     {{team.name_team}}
                 </mat-option>
             </mat-select>
@@ -78,7 +78,7 @@
 
         <mat-dialog-actions align="end">
             <button mat-button mat-dialog-close>Quay lại</button>
-            <button mat-button (click)="save()" [disabled]="!form.valid || teams.length===0 && user.id_team === null">Lưu</button>
+            <button mat-button (click)="save()" [disabled]="!form.valid || teams.length === 0">Lưu</button>
         </mat-dialog-actions>
     </form>
 </mat-dialog-content>
