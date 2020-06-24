@@ -20,13 +20,5 @@ export class TeamDetailComponent implements OnInit {
   ngOnInit(): void {
     this.team = this.data;
     console.log(this.team);
-    this.getAllCourses();
   }
-
-  getAllCourses() {
-    this.programService.getAllProgram().subscribe((res) => {
-      this.courses = res;
-    })
-  }
-
 }

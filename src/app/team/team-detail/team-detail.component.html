@@ -1,10 +1,8 @@
 <h2 mat-dialog-title>Chi tiết thông tin team</h2>
 <hr>
 <mat-dialog-content class="mat-typography">
-
   <h3 class="card-title ">Tên team : {{team.name_team | uppercase}}</h3>
-  <h3 class="card-title ">Tên khóa học : </h3>
-
+  <h3 class="card-title ">Tên khóa học :{{ team.name_course | uppercase }} </h3>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Quay lại</button>
