@@ -28,23 +28,11 @@ export class UserDialogComponent implements OnInit {
 
     this.initForm();
     this.user = this.data;
-    this.getAllCourses();
-    this.form.get('course').valueChanges.subscribe((course) => {
-      console.log(course)
-      if (course) {
-        this.teamService.getAllTeam().subscribe((res) => {
-          if (res) {
-            this.teams = res.filter((t) => {
-              return t.id_course === course;
-            });
-          }
-        })
-      }
-    })
-    this.form.valueChanges.subscribe((aaa) => {
-      console.log(aaa)
-    })
+    this.getInitCourses();
+    this.getInitTeams(this.user.id_course)
+
   }
+
   initForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
@@ -58,12 +46,40 @@ export class UserDialogComponent implements OnInit {
     })
 
   }
-  getAllCourses() {
+
+  getInitCourses() {
     this.programService.getAllProgram().subscribe((res) => {
       this.courses = res;
+    })
+  }
+
+  getInitTeams(courseId){
+    this.teamService.getAllTeam().subscribe((res) => {          
+      if (res) {
+        this.teams = res.filter((t) => {
+          return t.id_course === courseId;
+        });
+        
+      }
     })
   }
   save() {
     this.dialogRef.close(this.user);
   }
+  changeCourse(event){
+    console.log(event)
+    let course = event;
+    if (course) {
+      this.teamService.getAllTeam().subscribe((res) => {          
+        if (res) {
+          this.teams = res.filter((t) => {
+            return t.id_course === course;
+          });
+          this.user.id_team = null
+        }
+      })
+    }
+  }
+    
+  
 }

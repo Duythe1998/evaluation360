@@ -74,7 +74,7 @@ export class UsersListComponent implements OnInit {
   updateUser(user) {
     console.log(user)
     let obj = {
-      user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), user_password: user.user_password, id_course: user.id_course, id_team: user.id_team
+    id: user.id,  user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), user_password: user.user_password, id_course: user.id_course, id_team: user.id_team
     }
     console.log(obj)
     const dialogRef = this.dialog.open(UserDialogComponent, {
