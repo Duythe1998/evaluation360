@@ -11,7 +11,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./user-dialog.component.css']
 })
 export class UserDialogComponent implements OnInit {
-  title: any;
   user = {} as User
   form: FormGroup;
   courses = [];
@@ -31,18 +30,20 @@ export class UserDialogComponent implements OnInit {
     this.user = this.data;
     this.getAllCourses();
     this.form.get('course').valueChanges.subscribe((course) => {
+      console.log(course)
       if (course) {
         this.teamService.getAllTeam().subscribe((res) => {
           if (res) {
             this.teams = res.filter((t) => {
               return t.id_course === course;
             });
-
           }
         })
       }
     })
-
+    this.form.get('team').valueChanges.subscribe((team) => {
+      console.log(team)
+    })
   }
   initForm() {
     this.form = this.fb.group({
@@ -52,9 +53,8 @@ export class UserDialogComponent implements OnInit {
       address: ['', [Validators.required]],
       birth: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern("(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})")]],
-      team: ['', Validators.required],
       course: ['', [Validators.required]],
-
+      team: ['', [Validators.required]],
     })
 
   }
@@ -63,7 +63,6 @@ export class UserDialogComponent implements OnInit {
       this.courses = res;
     })
   }
-  get f() { return this.form.controls; }
   save() {
     this.dialogRef.close(this.user);
   }

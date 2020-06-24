@@ -14,30 +14,28 @@
     </div>
     <div class="col-6">
       <div class="d-flex justify-content-end align-items-center ">
-        <button (click)="addNewUser()" type="button" class="btn btn-primary">Thêm mới
+        <button mat-button (click)="addNewUser()" type="button" class="btn btn-primary">Thêm mới
           user</button>
       </div>
     </div>
   </div>
   <table class="table">
-    <thead >
+    <thead style="background-color: #4e73df;color: #fff;">
       <tr>
         <th scope="col">STT</th>
-        <th scope="col">ID</th>
         <th scope="col">Họ và tên</th>
         <th scope="col">Team</th>
         <th scope="col">Khóa học</th>
-        <th scope="col">Action</th>
+        <th class="text-center" scope="col">Action</th>
       </tr>
     </thead>
       <tbody >
             <tr *ngFor="let user of users | filter:searchText ; let i = index">
-              <td colspan="1" scope="row">{{i + 1}}</td>
-              <td>{{user.id}}</td>
+              <td scope="row">{{i + 1}}</td>
               <td>{{user.user_name}}</td>
               <td>{{user.name_team}}</td>
               <td>{{user.name_course}}</td>
-              <td>
+              <td class="text-center">
                 <button (click)="viewUserDetail(user)" class="btn btn-primary btn-sm btn-action"><i class="fa fa-eye"
                     aria-hidden="true"></i></button>
                 <button (click)="updateUser(user)" class="btn btn-success btn-sm btn-action"><i class="fa fa-wrench"
