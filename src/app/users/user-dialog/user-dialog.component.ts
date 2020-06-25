@@ -1,7 +1,7 @@
 import { ProgramService } from './../../service/program.service';
 import { TeamService } from './../../service/team.service';
 import { User } from './../users-list/users-list.component';
-import { Component, OnInit, Inject, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -11,7 +11,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./user-dialog.component.css']
 })
 export class UserDialogComponent implements OnInit {
-  title: any;
   user = {} as User
   form: FormGroup;
   courses = [];
@@ -29,21 +28,11 @@ export class UserDialogComponent implements OnInit {
 
     this.initForm();
     this.user = this.data;
-    this.getAllCourses();
-    this.form.get('course').valueChanges.subscribe((course) => {
-      if (course) {
-        this.teamService.getAllTeam().subscribe((res) => {
-          if (res) {
-            this.teams = res.filter((t) => {
-              return t.id_course === course;
-            });
-
-          }
-        })
-      }
-    })
+    this.getInitCourses();
+    this.getInitTeams(this.user.id_course)
 
   }
+
   initForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
@@ -52,19 +41,45 @@ export class UserDialogComponent implements OnInit {
       address: ['', [Validators.required]],
       birth: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern("(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})")]],
-      team: ['', Validators.required],
       course: ['', [Validators.required]],
-
+      team: ['', [Validators.required]],
     })
 
   }
-  getAllCourses() {
+
+  getInitCourses() {
     this.programService.getAllProgram().subscribe((res) => {
       this.courses = res;
     })
   }
-  get f() { return this.form.controls; }
+
+  getInitTeams(courseId){
+    this.teamService.getAllTeam().subscribe((res) => {          
+      if (res) {
+        this.teams = res.filter((t) => {
+          return t.id_course === courseId;
+        });
+        
+      }
+    })
+  }
   save() {
     this.dialogRef.close(this.user);
   }
+  changeCourse(event){
+    console.log(event)
+    let course = event;
+    if (course) {
+      this.teamService.getAllTeam().subscribe((res) => {          
+        if (res) {
+          this.teams = res.filter((t) => {
+            return t.id_course === course;
+          });
+          this.user.id_team = null
+        }
+      })
+    }
+  }
+    
+  
 }

@@ -5,13 +5,9 @@ table td , table th {
   vertical-align: middle;
   text-align: center;
 }
-table th{
-  color: white;
-}
+
 
 .btn-action {
   margin: 0.5rem;
 }
- thead{
-   background-color: #4e73df;
- }
+

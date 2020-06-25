@@ -29,9 +29,7 @@ export class UsersListComponent implements OnInit {
   }
   getAllUsers() {
     this.userService.getAllUser().subscribe((res) => {
-      console.log(res)
       this.users = res;
-      
     })
   }
   deleteUser(id) {
@@ -58,13 +56,12 @@ export class UsersListComponent implements OnInit {
   addNewUser() {
     const dialogRef = this.dialog.open(UserDialogComponent, {
       data: {
-        user_name: this.user.user_name, email: this.user.email, address: this.user.address, phone: this.user.phone, birth: this.user.birth, user_password: this.user.user_password, id_course: this.user.id_course, id_team: this.user.id_team
+       id: this.user.id, user_name: this.user.user_name, email: this.user.email, address: this.user.address, phone: this.user.phone, birth: this.user.birth, user_password: this.user.user_password, id_course: this.user.id_course, id_team: this.user.id_team
       }
     });
     dialogRef.afterClosed().subscribe((user) => {
       if (user) {
         this.userService.addUser(user).subscribe((res) => {
-          console.log(res)
           if (res) {
            this.toastr.success(res['message']);
             this.getAllUsers();
@@ -77,7 +74,7 @@ export class UsersListComponent implements OnInit {
   updateUser(user) {
     console.log(user)
     let obj = {
-      user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), user_password: user.user_password, id_course: user.id_course, id_team: user.id_team
+    id: user.id,  user_name: user.user_name, email: user.email, address: user.address, phone: user.phone, birth: moment(user.birth).format('YYYY-MM-DD'), user_password: user.user_password, id_course: user.id_course, id_team: user.id_team
     }
     console.log(obj)
     const dialogRef = this.dialog.open(UserDialogComponent, {
