@@ -25,14 +25,14 @@ export class UsersListComponent implements OnInit{
   displayedColumns: string[] = ['STT', 'user_name', 'name_team', 'name_course','actions'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  
- 
+
+
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
     private toastr: ToastrService
   ) { }
-  
+
 
   ngOnInit(): void {
     this.getAllUsers();

@@ -13,7 +13,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TeamDialogComponent } from './team-dialog/team-dialog.component';
 import {TeamDetailComponent} from './team-detail/team-detail.component';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,9 @@ import {TeamDetailComponent} from './team-detail/team-detail.component';
     MatDatepickerModule,
     MatNativeDateModule,
     Ng2SearchPipeModule,
+    MatPaginatorModule,
+    MatTableModule,
+    ToastrModule.forRoot(),
   ]
 })
 export class TeamModule { }
