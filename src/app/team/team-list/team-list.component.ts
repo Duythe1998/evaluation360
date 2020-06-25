@@ -1,22 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {TeamService} from '../../service/team.service'
 import { TeamDialogComponent } from '../team-dialog/team-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TeamDetailComponent } from '../team-detail/team-detail.component';
-import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
 @Component({
   selector: 'app-team-list',
-  templateUrl: './team-list.component.html',
+  templateUrl:'./team-list.component.html',
   styleUrls: ['./team-list.component.css']
 })
 export class TeamListComponent implements OnInit {
-  searchText;
+  dataSource : any;
   team = {} as Team;
-  teams = [];
+  teams : Team[] = [];
+
+  displayedColumns : string[] = ['STT','name_team','name_course','actions']
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
   constructor(
     private teamService: TeamService,
     private dialog : MatDialog,
@@ -28,9 +34,17 @@ export class TeamListComponent implements OnInit {
     console.log(this.teams)
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue);
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   getAllTeam(){
     this.teamService.getAllTeam().subscribe((res) => {
       this.teams = res;
+      this.dataSource = new MatTableDataSource<Team>(this.teams)
+      this.dataSource.paginator = this.paginator;
       console.log(this.teams)
     })
   }
@@ -61,7 +75,10 @@ export class TeamListComponent implements OnInit {
     const dialogRef = this.dialog.open(TeamDialogComponent, {
       width: '500px',
       data: {
-        name_team : this.team.name_team
+        name_team : this.team.name_team,
+        id_team : this.team.id_team,
+        name_course : this.team.name_course,
+        id_course: this.team.id_course
       }
 
     });
@@ -82,7 +99,9 @@ export class TeamListComponent implements OnInit {
   updateTeam(team){
     console.log(team);
     let obj = {
-      name_team: team.name_team,
+      name_team : team.name_team,
+      id_team : team.id_team,
+      name_course : team.name_course,
       id_course: team.id_course
     }
     console.log(obj)
