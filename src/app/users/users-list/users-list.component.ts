@@ -1,11 +1,14 @@
 import { UserDialogComponent } from './../user-dialog/user-dialog.component';
 import { UserService } from '../../service/user.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -13,25 +16,42 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.css']
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit{
+  dataSource: any;
+
+  users: User[] = [];
   searchText;
   user = {} as User;
-  users = [];
+  displayedColumns: string[] = ['STT', 'user_name', 'name_team', 'name_course','actions'];
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  
+ 
   constructor(
     private userService: UserService,
     private dialog: MatDialog,
     private toastr: ToastrService
   ) { }
+  
 
   ngOnInit(): void {
     this.getAllUsers();
-    console.log(this.users);
+    console.log(this.dataSource)
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   getAllUsers() {
     this.userService.getAllUser().subscribe((res) => {
-      this.users = res;
+      if(res){
+        this.users = res;
+        this.dataSource = new MatTableDataSource<User>(this.users);
+        this.dataSource.paginator = this.paginator;
+      }
     })
   }
+
   deleteUser(id) {
     if (confirm('Bạn có chắc chắn xóa')) {
       this.userService.deleteUser(id).subscribe((res) => {

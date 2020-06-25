@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     UserDetailComponent,
@@ -35,7 +37,10 @@ import { ToastrModule } from 'ngx-toastr';
     MatNativeDateModule,
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatPaginatorModule,
+    MatTableModule,
+    
   ]
 })
 export class UsersModule { }

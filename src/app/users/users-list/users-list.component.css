@@ -1,14 +1,22 @@
 .btn-action {
     margin-bottom: 10px;
 }
-table td {
-    vertical-align: middle;
-    
-}
 table th {
-    vertical-align: middle;
-    
+   
+    font-size: 1rem;
+    font-weight: bold;
 }
+
 .btn-action {
     margin: 0.5rem;
+}
+table {
+    width: 100%;
+}
+th.mat-sort-header-sorted {
+    color: black;
+}
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
 }
