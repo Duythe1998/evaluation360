@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-program-item',
-  templateUrl: './program-item.component.html',
+  templateUrl:'./program-item.component.html',
   styleUrls: ['./program-item.component.css']
 })
 export class ProgramItemComponent implements OnInit {
@@ -23,5 +23,5 @@ export class ProgramItemComponent implements OnInit {
     this.dialogRef.close(this.program)
     console.log(this.program);
   }
-    
+
 }

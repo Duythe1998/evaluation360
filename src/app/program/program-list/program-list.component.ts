@@ -5,7 +5,7 @@ import { Program } from 'src/app/models/program.model';
 import {NgForm} from '@angular/forms'
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog'
 import * as moment from 'moment'
-import { ProgramItemComponent } from '../program-item/program-item.component';
+import { ProgramItemComponent } from'../program-item/program-item.component';
 import { ToastrService } from 'ngx-toastr';
 import { ProgramDetailComponent } from '../program-detail/program-detail.component';
 @Component({
@@ -26,7 +26,7 @@ export class ProgramListComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProgram()
   }
-  // get program to reander 
+  // get program to reander
   getAllProgram() {
     this.programService.getAllProgram().subscribe(res => {
       this.programs = res;
@@ -43,9 +43,9 @@ export class ProgramListComponent implements OnInit {
       disableClose: true,
       width:"40%",
       data:{
-        
+
       },
-    
+
     });
     dialogConfig.afterClosed().subscribe(res => {
       if (res) {
@@ -68,7 +68,7 @@ export class ProgramListComponent implements OnInit {
         console.log(res)
       })
     }
-    
+
   }
 
   updateProgram(program:Program){

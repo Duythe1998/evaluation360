@@ -47,6 +47,7 @@ export class TeamListComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       console.log(this.teams)
     })
+
   }
 
   viewTeamDetail(team){
@@ -129,4 +130,5 @@ export interface Team {
   id_team: number;
   name_team: string;
   name_course:string;
+  user_name: string;
 }
