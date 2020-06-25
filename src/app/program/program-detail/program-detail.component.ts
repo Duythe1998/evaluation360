@@ -12,6 +12,7 @@ export class ProgramDetailComponent implements OnInit {
     public programService : ProgramService,
     @Inject(MAT_DIALOG_DATA) public data :any,
     public dialogRef: MatDialogRef<ProgramDetailComponent>
+
   ) { }
 
   ngOnInit(): void {
