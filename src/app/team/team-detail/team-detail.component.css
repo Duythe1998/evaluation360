@@ -1,3 +1,6 @@
 .mat-dialog-content{
-  height: 7em;
+  height: 20em;
+}
+table td {
+  vertical-align: middle;
 }
