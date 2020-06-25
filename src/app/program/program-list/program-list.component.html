@@ -23,10 +23,10 @@
         <div class="d-flex justify-content-end align-items-center ">
 
           <button
-            class="btn btn-primary float-right"
-            data-toggle="modal"
+            (click) ="addOrEditProgram()"
+            class="btn btn-primary float-right" 
+            data-toggle="modal" 
             data-target="#exampleModalCenter"
-            (click) = "conditionAdd()"
           >
             Thêm mới khóa học
           </button>
@@ -47,23 +47,33 @@
         </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let program of programs">
-        <td scope="row">{{program.id_course}}</td>
+      <!-- <tr *ngIf="programs.length==0">
+        <td class="font-italic text-center " colspan="5">
+          Chưa có thông tin khóa học nào.
+        </td>
+      </tr> -->
+      <tr *ngFor="let program of programs; let i = index">
+        <td scope="row">{{i +1}}</td>
         <td>{{program.name_course}}</td>
-        <td>{{program.date_start | date:"mediumDate"}}</td>
-        <td>{{program.date_end | date:"mediumDate"}}</td>
+        <td>{{program.date_start}}</td>
+        <td>{{program.date_end}}</td>
         <td class="text-center" >
-            <button class="btn btn-primary btn-sm btn-action mr-2"><i class="fa fa-eye" aria-hidden="true"></i></button>
             <button
-              (click) = "loadData(program.id_course);conditionEdit()"
+              (click)= "viewProgramDetail(program)"
+              class="btn btn-primary btn-sm btn-action mr-2"
+            >
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+            <button
+              (click) = "updateProgram(program)"
               class="btn btn-success btn-sm btn-action mr-2"
               data-toggle="modal"
               data-target="#exampleModalCenter"
             >
               <i class="fa fa-wrench" aria-hidden="true"></i>
             </button>
-            <button
-              (click)="onDeleteProgram(program.id_course)"
+            <button 
+              (click) = "deleteProgram(program.id_course)"
               class="btn btn-danger btn-sm btn-action mr-2"
             >
               <i class="fa fa-trash" aria-hidden="true"></i>
@@ -72,88 +82,3 @@
     </tr>
     </tbody>
   </table>
-
-  <!-- modal -->
-  <div
-    class="modal fade bd-example-modal-lg show"
-    id="exampleModalCenter"
-    tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-modal="true"
-  >
-
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-
-          <h5 class="modal-title" >{{condition ? 'Thêm khóa học' : 'Sửa khóa học'}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group row">
-              <label for="nameCourse" class="col-sm-2 col-form-label">Tên khóa học</label>
-              <div class="col-sm-10">
-
-                <input
-                  [(ngModel)] = "program.name_course"
-                  [ngModelOptions]="{standalone: true}"
-                  type="text"
-                  class="form-control"
-                  id="nameCourse"
-                  value=""
-                >
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="startDate" class="col-sm-2 col-form-label">Ngày bắt đầu</label>
-              <div class="col-sm-10">
-                <input
-                  [(ngModel)] = "program.date_start "
-                  [ngModelOptions]="{standalone: true}"
-                  type="date"
-                  class="form-control"
-                  id="startDate" placeholder="Ngày bắt đầu">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="endDate" class="col-sm-2 col-form-label">Ngày kết thúc</label>
-              <div class="col-sm-10">
-                <input
-                  [(ngModel)] = "program.date_end"
-                  [ngModelOptions]="{standalone: true}"
-                  type="date"
-                  class="form-control"
-                  id="endDate" p
-                  laceholder="Ngày kết thúc">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Mô tả</label>
-              <div class="col-sm-10">
-                <textarea
-                  [(ngModel)] = "program.description"
-                  [ngModelOptions]="{standalone: true}"
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="2"></textarea>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-          <button
-            (click)="AddorUpdate(program)"
-            type="button"
-            class="btn btn-primary"
-          >
-            Lưu
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

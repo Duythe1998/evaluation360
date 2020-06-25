@@ -7,16 +7,20 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersRoutingModule } from './users/users-routing.module';
 import { TeamRoutingModule } from './team/team-routing.module';
 import { ProgramListComponent } from './program/program-list/program-list.component';
+import { ProgramItemComponent } from './program/program-item/program-item.component';
+import { ProgramDetailComponent } from './program/program-detail/program-detail.component';
 
 const routes: Routes = [
 
   {
     path: 'dashboard' , component : DashboardComponent
   },
-  {
-    path: 'program-list', 
-    component:ProgramListComponent
-  }
+  {path:'programs', component:ProgramListComponent},
+  {path: 'program', children:[
+    {path:'',component:ProgramItemComponent},
+    {path:'edit/:id', component:ProgramItemComponent},
+    {path:'view/:id', component:ProgramDetailComponent}
+  ]}
 ];
 
 @NgModule({
