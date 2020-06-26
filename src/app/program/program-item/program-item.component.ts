@@ -13,6 +13,7 @@ import { forbiddenNameValidator } from 'src/app/shared/program-name.validator';
 export class ProgramItemComponent implements OnInit {
   program : Program
   form: FormGroup;
+  status:boolean = true;
   constructor(
     public programService : ProgramService,
     @Inject(MAT_DIALOG_DATA) public data :any,
@@ -28,11 +29,19 @@ export class ProgramItemComponent implements OnInit {
     this.form = this.fb.group({
       nameCourse: ['', [Validators.required, Validators.minLength(3)]],
       dateStart: ['', [Validators.required]],
-      dateEnd: ['', [Validators.required]]
-
+      dateEnd: ['', [Validators.required,]]
+      
     })
-
   }
+  
+  error:any={isError:false,errorMessage:''};
+
+  compareTwoDates(){
+    if(new Date(this.form.controls['dateEnd'].value)<new Date(this.form.controls['dateStart'].value)){
+        this.error={isError:true,errorMessage:"Ngày kết thúc phải lớn hơn ngày bắt đầu"};
+        this.form.patchValue({dateEnd:this.form.controls['dateStart'].value})
+      }
+    }
   get nameCourse() {
     return this.form .get('nameCourse')
   }

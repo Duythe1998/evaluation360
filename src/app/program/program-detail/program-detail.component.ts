@@ -27,8 +27,9 @@ export class ProgramDetailComponent implements OnInit {
     this.userService.getAllUser().subscribe(res => {
       this.userTeams = res.filter(userTeam => {
         return userTeam.id_course == this.program.id_course
-      })
-      
+      })  
     })
   }
+  
+
 }

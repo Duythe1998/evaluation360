@@ -41,6 +41,7 @@
       <label for="endDate" class="col-sm-2 col-form-label">Ngày kết thúc</label>
       <div class="col-sm-10">
         <input
+          (blur)="compareTwoDates()"
           formControlName="dateEnd"
           [class.is-invalid] ="dateEnd.invalid && dateEnd.touched"
           [(ngModel)] = "program.date_end"
@@ -48,8 +49,9 @@
           class="form-control" 
           required
           id="endDate">
-          <div *ngIf="dateEnd.invalid && dateEnd.touched">
+          <div *ngIf="dateEnd.invalid && dateEnd.touched || error.isError">
             <small class="text-danger" *ngIf="dateEnd.errors?.required" >Hãy nhập Ngày kết thúc</small>
+            <small class="text-danger" *ngIf="error.isError" > {{ error.errorMessage }}</small>
           </div>
       </div>
     </div>
