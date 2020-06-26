@@ -100,9 +100,8 @@ export class TeamListComponent implements OnInit {
   updateTeam(team){
     console.log(team);
     let obj = {
-      name_team : team.name_team,
       id_team : team.id_team,
-      name_course : team.name_course,
+      name_team : team.name_team,
       id_course: team.id_course
     }
     console.log(obj)
