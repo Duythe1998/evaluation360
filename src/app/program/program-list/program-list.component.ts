@@ -29,7 +29,7 @@ export class ProgramListComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProgram()
   }
-  // get program to reander 
+  // get program to reander
   getAllProgram() {
     this.programService.getAllProgram().subscribe(res => {
       this.programs = res;
@@ -46,9 +46,9 @@ export class ProgramListComponent implements OnInit {
       disableClose: true,
       width:"40%",
       data:{
-        
+
       },
-    
+
     });
     dialogConfig.afterClosed().subscribe(res => {
       if (res) {
@@ -71,7 +71,7 @@ export class ProgramListComponent implements OnInit {
         console.log(res)
       })
     }
-    
+
   }
 
   updateProgram(program:Program){

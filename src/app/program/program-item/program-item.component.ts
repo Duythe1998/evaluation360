@@ -7,7 +7,7 @@ import { forbiddenNameValidator } from 'src/app/shared/program-name.validator';
 
 @Component({
   selector: 'app-program-item',
-  templateUrl: './program-item.component.html',
+  templateUrl:'./program-item.component.html',
   styleUrls: ['./program-item.component.css']
 })
 export class ProgramItemComponent implements OnInit {

@@ -43,9 +43,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Back-end</td>
+                <tr *ngFor="let userTeam of userTeams; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{userTeam.name_team}}</td>
                   <td><div class="list-group">
                     <ul class="list-group">
                       <li class="list-group-item">Nguyễn Duy Thế</li>
