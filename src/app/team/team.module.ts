@@ -16,6 +16,7 @@ import {TeamDetailComponent} from './team-detail/team-detail.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatPaginatorModule,
     MatTableModule,
     ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ]
 })
 export class TeamModule { }
