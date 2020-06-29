@@ -63,12 +63,15 @@ export class ProgramListComponent implements OnInit {
   deleteProgram(id:number){
     if(confirm('Bạn có chắc muốn xóa không ? ')){
       this.programService.deleteProgram(id).subscribe(res => {
-        this.toastr.success(res['message']);
-        this.getAllProgram();
-        console.log(res)
+        if(res['message'] === "Xóa thành công"){
+          this.toastr.success(res['message']);
+          this.getAllProgram()
+        }
+        else {
+          this.toastr.error(res['message']);
+       }
       })
     }
-
   }
 
   updateProgram(program:Program){
