@@ -128,4 +128,5 @@ export interface User {
   id_course: number;
   name_team: string;
   name_course: string;
+  num: number;
 }
