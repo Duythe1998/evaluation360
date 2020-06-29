@@ -109,7 +109,7 @@ export class ProgramListComponent implements OnInit {
         name_course: program.name_course,
         date_start: program.date_start ,
         date_end:program.date_end,
-        description:program.description
+        description:program.description,
       }
     })
   }
