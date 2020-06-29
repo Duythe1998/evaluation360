@@ -65,10 +65,13 @@ export class TeamListComponent implements OnInit {
   deleteTeam(id){
     if(confirm('Bạn có chắc muốn xóa không ? ')){
       this.teamService.deleteTeam(id).subscribe((res) => {
-        if(res){
+        if(res['message'] === "Xóa thành công"){
           this.toastr.success(res['message']);
           this.getAllTeam()
         }
+        else {
+          this.toastr.error(res['message']);
+       }
       })
     }
   }
