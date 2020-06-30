@@ -40,7 +40,7 @@ export class UserDialogComponent implements OnInit {
       password: ['', [Validators.required]],
       address: ['', [Validators.required]],
       birth: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern("(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})")]],
+      phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       course: ['', [Validators.required]],
       team: ['', [Validators.required]],
     })
