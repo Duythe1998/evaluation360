@@ -14,11 +14,13 @@ export class ProgramItemComponent implements OnInit {
   program : Program
   form: FormGroup;
   status:boolean = true;
+  dateWrong = false;
   constructor(
     public programService : ProgramService,
     @Inject(MAT_DIALOG_DATA) public data :any,
     public dialogRef: MatDialogRef<ProgramItemComponent>,
     private fb: FormBuilder
+    
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +31,8 @@ export class ProgramItemComponent implements OnInit {
     this.form = this.fb.group({
       nameCourse: ['', [Validators.required, Validators.minLength(3)]],
       dateStart: ['', [Validators.required]],
-      dateEnd: ['', [Validators.required,]]
-      
+      dateEnd: ['', [Validators.required,]],
+      condition:['show', [Validators.required,]]
     })
   }
   
@@ -39,7 +41,12 @@ export class ProgramItemComponent implements OnInit {
   compareTwoDates(){
     if(new Date(this.form.controls['dateEnd'].value)<new Date(this.form.controls['dateStart'].value)){
         this.error={isError:true,errorMessage:"Ngày kết thúc phải lớn hơn ngày bắt đầu"};
-        this.form.patchValue({dateEnd:this.form.controls['dateStart'].value})
+        this.form.patchValue({condition:''})
+        console.log(this.form.invalid)
+      }
+      else{
+        this.error={isError:false,errorMessage:""};
+        this.form.patchValue({condition:'show'});
       }
     }
   get nameCourse() {
@@ -56,5 +63,4 @@ export class ProgramItemComponent implements OnInit {
     this.dialogRef.close(this.program)
     console.log(this.program);
   }
-
-}
+} 
