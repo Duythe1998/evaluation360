@@ -54,7 +54,7 @@
         </td>
       </tr> -->
       <tr *ngFor="let program of programs | filter:programFilter | paginate:{itemsPerPage:5, currentPage:page} ; let i = index">
-        <td scope="row">{{i +1}}</td>
+        <td scope="row">{{program.num}}</td>
         <td>{{program.name_course}}</td>
         <td>{{program.date_start}}</td>
         <td>{{program.date_end}}</td>
