@@ -62,7 +62,11 @@
       background-color: #4e73df;"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
+    <div *ngIf="users.length ===0 ">
+      <div class="alert alert-danger text-center" role="alert">
+        Không có dữ liệu
+      </div>
+    </div>
     <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
   </div>
 
