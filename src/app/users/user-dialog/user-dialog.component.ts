@@ -43,7 +43,7 @@ export class UserDialogComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(15)]],
       address: ['', [Validators.required]],
       birth: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
@@ -86,16 +86,16 @@ export class UserDialogComponent implements OnInit {
       })
     }
   }
-  checkEmailExits(event){
-    let email = event;
-    if(email){
-      this.userService.getEmail(email).subscribe((result) => {
-          if(result){
-              this.toastrService.error("Email đã tồn tại");
-              this.form.get('email').setValue('')
-          }
-      })
-    }
-  }
+  // checkEmailExits(event){
+  //   let email = event;
+  //   if(email){
+  //     this.userService.getEmail(email).subscribe((result) => {
+  //         if(result){
+  //             this.toastrService.error("Email đã tồn tại");
+  //             this.form.get('email').setValue('')
+  //         }
+  //     })
+  //   }
+  // }
  
 }
