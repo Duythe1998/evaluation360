@@ -23,4 +23,7 @@ export class UserService {
   updateUser(user: User, id: number) {
     return this.http.put(this._baseURL + `users/${id}`, user)
   }
+  getEmail(email: string){
+    return this.http.get(this._baseURL +`checkEmail/${email}`)
+  }
 }
