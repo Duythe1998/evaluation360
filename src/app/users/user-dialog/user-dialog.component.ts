@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from './../../service/user.service';
 import { ProgramService } from './../../service/program.service';
 import { TeamService } from './../../service/team.service';
 import { User } from './../users-list/users-list.component';
@@ -11,15 +13,19 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./user-dialog.component.css']
 })
 export class UserDialogComponent implements OnInit {
+  checkEmail: boolean = false;
   user = {} as User
   form: FormGroup;
   courses = [];
   teams = [];
+  listUserEmail = [];
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<UserDialogComponent>,
     private teamService: TeamService,
     private programService: ProgramService,
+    private userService : UserService,
+    private toastrService : ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
 
   ) { }
@@ -80,6 +86,16 @@ export class UserDialogComponent implements OnInit {
       })
     }
   }
-    
-  
+  checkEmailExits(event){
+    let email = event;
+    if(email){
+      this.userService.getEmail(email).subscribe((result) => {
+          if(result){
+              this.toastrService.error("Email đã tồn tại");
+              this.form.get('email').setValue('')
+          }
+      })
+    }
+  }
+ 
 }

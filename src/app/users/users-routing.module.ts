@@ -7,6 +7,9 @@ const UserRoutes: Routes = [
   {
     path: 'user-management', component : UsersListComponent
   },
+  {
+    path: '', redirectTo: '/user-management', pathMatch: 'full'
+  }
 ];
 
 @NgModule({

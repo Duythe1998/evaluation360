@@ -26,6 +26,7 @@ import { ProgramItemComponent } from './program/program-item/program-item.compon
 import {ProgramService} from './service/program.service'
 import { from } from 'rxjs';
 import { ProgramDetailComponent } from './program/program-detail/program-detail.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ProgramDetailComponent } from './program/program-detail/program-detail.
     FooterComponent,
     ProgramListComponent,
     ProgramItemComponent,
-    ProgramDetailComponent
+    ProgramDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

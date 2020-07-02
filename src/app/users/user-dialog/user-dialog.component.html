@@ -10,7 +10,8 @@
         </mat-form-field>
 
         <mat-form-field class="full-width">
-            <input matInput placeholder="Email" formControlName="email" [(ngModel)]="user.email">
+            <input matInput placeholder="Email" formControlName="email" [(ngModel)]="user.email"
+                (blur)="checkEmailExits($event.target.value)">
             <mat-error *ngIf="form.get('email').hasError('required')">
                 Email không được để trống
             </mat-error>
@@ -19,7 +20,7 @@
         </mat-form-field>
 
         <mat-form-field class="full-width">
-            <input matInput placeholder="Mật khẩu" formControlName="password" [(ngModel)]="user.user_password">
+            <input matInput placeholder="Mật khẩu" formControlName="password" [(ngModel)]="user.user_password" maxlength="15">
             <mat-error *ngIf="form.get('password').hasError('required')">
                 Mật khẩu không được để trống
             </mat-error>
@@ -54,25 +55,25 @@
         <mat-form-field class="full-width">
             <mat-label>Khóa học</mat-label>
             <mat-select formControlName="course" [(ngModel)]="user.id_course" (valueChange)="changeCourse($event)">
-               
+
                 <mat-option *ngFor="let course of courses" [value]="course.id_course">
                     {{course.name_course}}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="form.get('course').hasError('required')">
                 Khóa học không được để trống
-             </mat-error>
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
             <mat-label>Team</mat-label>
             <mat-select formControlName="team" [(ngModel)]="user.id_team">
-                <mat-option *ngFor="let team of teams" [value]="team.id_team" >
+                <mat-option *ngFor="let team of teams" [value]="team.id_team">
                     {{team.name_team}}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="form.get('team').hasError('required')">
-               Team không được để trống
+                Team không được để trống
             </mat-error>
         </mat-form-field>
 
