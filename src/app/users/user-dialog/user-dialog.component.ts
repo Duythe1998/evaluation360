@@ -13,7 +13,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./user-dialog.component.css']
 })
 export class UserDialogComponent implements OnInit {
-  checkEmail: boolean = false;
   user = {} as User
   form: FormGroup;
   courses = [];
@@ -86,16 +85,17 @@ export class UserDialogComponent implements OnInit {
       })
     }
   }
-  // checkEmailExits(event){
-  //   let email = event;
-  //   if(email){
-  //     this.userService.getEmail(email).subscribe((result) => {
-  //         if(result){
-  //             this.toastrService.error("Email đã tồn tại");
-  //             this.form.get('email').setValue('')
-  //         }
-  //     })
-  //   }
-  // }
+  checkEmailExits(event){
+    let email = event;
+    console.log(email)
+    if(email){
+      this.userService.getEmail(email).subscribe((result) => {
+          if(result){
+              this.toastrService.error("Email đã tồn tại");
+              this.form.get('email').setValue('')        
+          }
+      })
+    }
+  }
  
 }
