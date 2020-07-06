@@ -17,11 +17,16 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{ team.name_team }}</td>
-        <td>{{  team.name_course}}</td>
+        <td>{{team.name_team }}</td>
+        <td>{{team.name_course}}</td>
         <td>
           <div class="list-group">
             <ul class="list-group">
+              <div *ngIf="users.length ===0 ">
+                <div class="alert alert-danger text-center" role="alert">
+                  Không có thành viên
+                </div>
+              </div>
               <li class="list-group-item" *ngFor="let user of users">{{user.user_name}}</li>
             </ul>
           </div>
