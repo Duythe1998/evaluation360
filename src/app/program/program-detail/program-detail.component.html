@@ -39,44 +39,12 @@
                 <tr>
                   <th scope="col">STT</th>
                   <th scope="col">Team</th>
-                  <th scope="col">Thành viên</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Back-end</td>
-                  <td><div class="list-group">
-                    <ul class="list-group">
-                      <li class="list-group-item">Nguyễn Duy Thế</li>
-                      <li class="list-group-item">Lê Xuân Tùng</li>
-                      <li class="list-group-item">Nguyễn Ngọc Quý</li>
-                      <li class="list-group-item">Võ Công Đức</li>
-                    </ul></div></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Front-end</td>
-                  <td><div class="list-group">
-                    <ul class="list-group">
-                      <li class="list-group-item">Nguyễn Duy Thế</li>
-                      <li class="list-group-item">Lê Xuân Tùng</li>
-                      <li class="list-group-item">Nguyễn Ngọc Quý</li>
-                      <li class="list-group-item">Võ Công Đức</li>
-                    </ul></div></td>
-                  
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Tester</td>
-                  <td><div class="list-group">
-                    <ul class="list-group">
-                      <li class="list-group-item">Nguyễn Duy Thế</li>
-                      <li class="list-group-item">Lê Xuân Tùng</li>
-                      <li class="list-group-item">Nguyễn Ngọc Quý</li>
-                      <li class="list-group-item">Võ Công Đức</li>
-                    </ul></div></td>
-                 
+                <tr *ngFor="let userTeam of userTeams; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{userTeam.name_team}}</td>
                 </tr>
               </tbody>
             </table>

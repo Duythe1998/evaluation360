@@ -1,49 +1,69 @@
 <h5 class="modal-title" ></h5>
 <hr>
 
-<form #programForm = "ngForm" autocomplete="off">
+<form [formGroup]="form"  autocomplete="off">
     <div class="form-group row">
       <label for="nameCourse" class="col-sm-2 col-form-label">Tên khóa học</label>
       <div class="col-sm-10">
 
         <input
-          #nameCourse="ngModel"
+          formControlName="nameCourse"
+          [class.is-invalid] ="nameCourse.invalid && nameCourse.touched "
           [(ngModel)] = "program.name_course"
-          [ngModelOptions]="{standalone: true}"
           type="text" 
           class="form-control" 
-          id="nameCourse" 
-          value=""
+          id="nameCourse"
         >
+        <div *ngIf="nameCourse.invalid && nameCourse.touched ">
+          <small class="text-danger" *ngIf="nameCourse.errors?.required" >Hãy nhập tên khóa học</small>
+          <small class="text-danger" *ngIf="nameCourse.errors?.minlength" >Tên khóa học phải có ít nhất 3 kí tự trở lên</small>
+          <small class="text-danger" *ngIf="nameCourse.errors?.forbiddenName" >Tên khóa học không được trùng với tên đã có</small>
+        </div>
+        
       </div>
     </div>
     <div class="form-group row">
       <label for="startDate" class="col-sm-2 col-form-label">Ngày bắt đầu</label>
       <div class="col-sm-10">
         <input
-          #dateStart="ngModel"
+          formControlName="dateStart"
+          [class.is-invalid] ="dateStart.invalid && dateStart.touched"
           [(ngModel)] = "program.date_start"
-          [ngModelOptions]="{standalone: true}"
           type="date" 
-          class="form-control" 
-          id="startDate" placeholder="Ngày bắt đầu">
+          class="form-control"
+          id="startDate">
+          <div *ngIf="dateStart.invalid &&  dateStart.touched">
+            <small class="text-danger" *ngIf="dateStart.errors?.required" >Hãy nhập Ngày bắt đầu</small>
+          </div>
       </div>
     </div>
     <div class="form-group row">
       <label for="endDate" class="col-sm-2 col-form-label">Ngày kết thúc</label>
       <div class="col-sm-10">
         <input
-          #dateEnd="ngModel"
+          (change)="compareTwoDates()"
+          formControlName="dateEnd"
+          [class.is-invalid] ="dateEnd.invalid && dateEnd.touched"
           [(ngModel)] = "program.date_end"
-          [ngModelOptions]="{standalone: true}"
           type="date" 
           class="form-control" 
-          id="endDate" p
-          laceholder="Ngày kết thúc">
+          required
+          id="endDate">
+          <input
+          (change)="compareTwoDates()"
+          formControlName="condition"
+          type="hidden" 
+          class="form-control" 
+          required
+          id="endDate">
+          <div *ngIf="dateEnd.invalid && dateEnd.touched || error.isError">
+            <small class="text-danger" *ngIf="dateEnd.errors?.required" >Hãy nhập Ngày kết thúc</small>
+            <small class="text-danger" *ngIf="error.isError" > {{ error.errorMessage }}</small>
+          </div>
       </div>
     </div>
     <div class="form-group row">
-      <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Mô tả</label>
+      <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Mô tả </label>
       <div class="col-sm-10">
         <textarea
           #description="ngModel"
@@ -57,6 +77,7 @@
     <mat-dialog-actions align="end">
       <button  class="btn btn-dark" mat-button mat-dialog-close>Hủy</button>
       <button
+        [disabled]= "form.invalid"
         (click)="done()"
         mat-button
         class="btn btn-primary"

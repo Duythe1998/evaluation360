@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from './../../service/user.service';
 import { ProgramService } from './../../service/program.service';
 import { TeamService } from './../../service/team.service';
 import { User } from './../users-list/users-list.component';
@@ -15,11 +17,14 @@ export class UserDialogComponent implements OnInit {
   form: FormGroup;
   courses = [];
   teams = [];
+  listUserEmail = [];
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<UserDialogComponent>,
     private teamService: TeamService,
     private programService: ProgramService,
+    private userService : UserService,
+    private toastrService : ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
 
   ) { }
@@ -37,10 +42,10 @@ export class UserDialogComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required,Validators.minLength(8),Validators.maxLength(15)]],
       address: ['', [Validators.required]],
       birth: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern("(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{3})([-s.]?[0-9]{3,4})")]],
+      phone: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       course: ['', [Validators.required]],
       team: ['', [Validators.required]],
     })
@@ -80,6 +85,17 @@ export class UserDialogComponent implements OnInit {
       })
     }
   }
-    
-  
+  checkEmailExits(event){
+    let email = event;
+    console.log(email)
+    if(email){
+      this.userService.getEmail(email).subscribe((result) => {
+          if(result){
+              this.toastrService.error("Email đã tồn tại");
+              this.form.get('email').setValue('')        
+          }
+      })
+    }
+  }
+ 
 }

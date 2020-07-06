@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './not-found/not-found.component';
 import { UsersListComponent } from './users/users-list/users-list.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
@@ -11,16 +12,14 @@ import { ProgramItemComponent } from './program/program-item/program-item.compon
 import { ProgramDetailComponent } from './program/program-detail/program-detail.component';
 
 const routes: Routes = [
-
-  {
-    path: 'dashboard' , component : DashboardComponent
-  },
+  
   {path:'programs', component:ProgramListComponent},
   {path: 'program', children:[
     {path:'',component:ProgramItemComponent},
     {path:'edit/:id', component:ProgramItemComponent},
     {path:'view/:id', component:ProgramDetailComponent}
-  ]}
+  ]},
+  {path : '**' , component :  NotFoundComponent}
 ];
 
 @NgModule({

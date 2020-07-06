@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule ,  } from '@angular/material/input';
 import {MatDatepickerModule } from '@angular/material/datepicker' ;
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule} from 'ngx-pagination'
 import { TeamModule } from './team/team.module';
 import {ProgramListComponent} from './program/program-list/program-list.component';
 import { ProgramItemComponent } from './program/program-item/program-item.component'
@@ -25,6 +26,8 @@ import { ProgramItemComponent } from './program/program-item/program-item.compon
 import {ProgramService} from './service/program.service'
 import { from } from 'rxjs';
 import { ProgramDetailComponent } from './program/program-detail/program-detail.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { ProgramDetailComponent } from './program/program-detail/program-detail.
     FooterComponent,
     ProgramListComponent,
     ProgramItemComponent,
-    ProgramDetailComponent
+    ProgramDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,8 @@ import { ProgramDetailComponent } from './program/program-detail/program-detail.
     MatNativeDateModule,
     Ng2SearchPipeModule,
     UsersModule,
-    TeamModule
+    TeamModule,
+    NgxPaginationModule
   ],
   entryComponents:[ProgramItemComponent],
   providers: [ProgramService],
